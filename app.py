@@ -13,7 +13,7 @@ database_file = "sqlite:///{}".format(os.path.join(project_dir, "bookdatabase.db
 
 app = Flask(__name__);
 
-app.config["SQLALCHEMY_DATABASE-URI"] = database_file;
+app.config["SQLALCHEMY_DATABASE_URI"] = database_file;
 
 db = SQLAlchemy(app);
 
@@ -25,6 +25,15 @@ class Book(db.Model):
 
     def __repr__(self):
         return "<Title: {}>".format(self.title);
+    
+    def __repr__(self):
+        return "<Autor: {}>".format(self.autor);
+
+    def __repr__(self):
+        return "<Genero: {}>".format(self.genero);
+
+    def __repr__(self):
+        return "<Num_pag: {}>".format(self.num_pag);
 
 
 @app.route('/', methods=["GET","POST"])
@@ -48,9 +57,31 @@ def update():
     try:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
         newtitle = request.form.get("newtitle")
         oldtitle = request.form.get("oldtitle")
+
+        newautor = request.form.get("newautor")
+        oldautor = request.form.get("oldautor")
+
+        newgenero = request.form.get("newgenero")
+        oldgenero = request.form.get("oldgenero")
+
+        newnum_pag = request.form.get("newnum_pag")
+        oldnum_pag = request.form.get("oldnum_pag")
+
         book = Book.query.filter_by(title=oldtitle).first()
         book.title = newtitle
+
+        book = Book.query.filter_by(title=oldautor).first()
+        book.autor = newautor
+
+        book = Book.query.filter_by(title=oldgenero).first()
+        book.genero = newgenero
+
+        book = Book.query.filter_by(title=oldnum_pag).first()
+        book.num_pag = newnum_pag
+        
         db.session.commit()
+
+
     except Exception as e:
         print("Não dá pra fazer update")
         print(e)
