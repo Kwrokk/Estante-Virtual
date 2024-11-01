@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Adicionar livro</h1>
+    <form action="/" method="post">
+        <INput type="text" name="title"></INput>
+        <input type="submit" value="add">
+    </form>
+
+    <h1>Livros</h1>
+    <table>
+        { % for book in books %}
+    </table>
+    <tr>
+        <td>
+            {{book.title}}
+        </td>
+    </tr>
+</body>
+</html>
